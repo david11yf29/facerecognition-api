@@ -1,6 +1,22 @@
 const express = require('express');
 const bcrypt = require('bcrypt-nodejs');
 const cors = require('cors');
+const knex = require('knex')
+
+const db = knex({
+    client: 'pg',
+    connection: {
+        // localhost 
+        host : '127.0.0.1',
+        user : 'DoDoTea',
+        password : '',
+        database : 'facerecognition-db'
+    }
+});
+
+// db.select('*').from('users').then(data => {
+//     console.log(data);
+// })
 
 const app = express();
 
@@ -49,13 +65,11 @@ app.post('/signin', (req, res) => {
 
 app.post('/register', (req, res) => {
     const { email, password, name } = req.body;
-    database.users.push({
-        id: "125",
-        name: name,
-        email: email,
-        entries: 0,
-        joined: new Date()
-    })
+    db('users').insert({
+         email: email,
+         name: name,
+         joined: new Date()
+    }).then(console.log)
     res.json(database.users[database.users.length - 1])
 });
 
