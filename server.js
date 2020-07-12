@@ -11,7 +11,7 @@ const db = knex({
     client: 'pg',
     connection: {
         // localhost 
-        host : '127.0.0.1',
+        host : 'postgresql-elliptical-55499',
         user : 'DoDoTea',
         password : '',
         database : 'facerecognition-db'
